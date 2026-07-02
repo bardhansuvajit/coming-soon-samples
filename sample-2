@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Orchids Boutique · Coming Soon</title>
+  <!-- Tailwind via CDN + custom base -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  <!-- Font Awesome for icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" />
+  <style>
+    /* ----- GOLD & GREEN CUSTOM VARIABLES (light theme enhanced) ----- */
+    :root {
+      --gold-light: #c9a84c;
+      --gold-dark: #b8860b;
+      --gold-pale: #e8d5a3;
+      --green-deep: #1a4a2a;
+      --green-soft: #eaf3e6;
+      --green-muted: #3b6b44;
+      --green-bg-light: #f2f7ef;
+      --gold-gradient: linear-gradient(135deg, #d4af37 0%, #b8860b 100%);
+    }
+    .gold-gradient {
+      background: var(--gold-gradient);
+    }
+    .gold-text {
+      color: var(--gold-dark);
+    }
+    .gold-border {
+      border-color: var(--gold-dark);
+    }
+    /* light theme overrides (more green & gold) */
+    .light-theme .gold-text {
+      color: #8a6d1b;
+    }
+    .light-theme .bg-green-soft {
+      background-color: var(--green-soft);
+    }
+    .light-theme .border-gold-light {
+      border-color: var(--gold-light);
+    }
+    .light-theme .text-green-deep {
+      color: var(--green-deep);
+    }
+    .light-theme .bg-gold-pale {
+      background-color: var(--gold-pale);
+    }
+    .light-theme .hover-gold-light:hover {
+      color: var(--gold-light);
+    }
+    /* toggle pill */
+    .toggle-pill {
+      width: 60px;
+      height: 30px;
+      background-color: #d4af37;
+      border-radius: 30px;
+      position: relative;
+      cursor: pointer;
+      transition: background 0.2s;
+      box-shadow: inset 0 1px 4px rgba(0,0,0,0.1);
+    }
+    .toggle-pill .toggle-knob {
+      width: 26px;
+      height: 26px;
+      background-color: white;
+      border-radius: 50%;
+      position: absolute;
+      top: 2px;
+      left: 2px;
+      transition: transform 0.25s ease, background 0.2s;
+      box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+    }
+    .toggle-pill.dark {
+      background-color: #2d5a3d;
+    }
+    .toggle-pill.dark .toggle-knob {
+      transform: translateX(30px);
+      background-color: #f5f0e8;
+    }
+    /* transition helper */
+    .transition-theme {
+      transition: background-color 0.3s ease, color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s;
+    }
+    /* light theme background */
+    body.light-theme {
+      background-color: #ebf3e7;
+    }
+    body.dark-theme {
+      background-color: #07170e;
+    }
+    #mainCard.light-theme {
+      background-color: #fafff8;
+      border-color: #b68b3c;
+      box-shadow: 0 20px 40px -12px rgba(60, 80, 40, 0.25);
+    }
+    #mainCard.dark-theme {
+      background-color: #0f281c;
+      border-color: #b8860b;
+      box-shadow: 0 20px 40px -12px rgba(0,0,0,0.7);
+    }
+    /* light theme extra accents */
+    .light-theme .gold-bg-light {
+      background-color: #e9dcb0;
+    }
+    .light-theme .border-gold-soft {
+      border-color: #d4af37;
+    }
+    .light-theme .text-gold-strong {
+      color: #8a6d1b;
+    }
+    .light-theme .bg-green-accent {
+      background-color: #d9e8d4;
+    }
+    .light-theme .gold-light-bg {
+      background: #f3edda;
+    }
+    /* notification pill light theme */
+    .light-theme .notif-pill {
+      background-color: #f2efe6;
+      border-color: #b68b3c;
+      color: #1e3a2a;
+    }
+    .dark-theme .notif-pill {
+      background-color: #1f3a2a;
+      border-color: #b8860b;
+      color: #e2dcc8;
+    }
+    /* responsive */
+    @media (max-width: 480px) {
+      .hero-title { font-size: 2.8rem; }
+    }
+  </style>
+</head>
+<body id="body" class="min-h-screen flex items-center justify-center p-4 md:p-8 font-sans antialiased light-theme transition-theme">
+
+  <!-- main card -->
+  <div id="mainCard" class="relative w-full max-w-3xl mx-auto rounded-3xl shadow-2xl overflow-hidden transition-theme light-theme border border-[#b68b3c]">
+    
+    <!-- decorative golden line top (always gold) -->
+    <div class="h-1.5 gold-gradient w-full"></div>
+
+    <!-- content -->
+    <div class="p-6 sm:p-10 md:p-12 lg:p-14">
+
+      <!-- header: brand + toggle -->
+      <div class="flex justify-between items-center mb-6">
+        <div class="flex items-center gap-2">
+          <i class="fas fa-seedling text-2xl gold-text light-theme:text-[#8a6d1b] dark-theme:text-[#d4af37]"></i>
+          <span class="text-2xl font-light tracking-widest uppercase text-[#1a4a2a] dark:text-[#e2dcc8] light-theme:text-[#1a4a2a]">
+            Orchids
+          </span>
+        </div>
+        <!-- theme toggle button -->
+        <button id="themeToggle" role="switch" aria-checked="false" aria-label="Toggle theme" 
+                class="toggle-pill flex items-center" type="button">
+          <span class="toggle-knob"></span>
+        </button>
+      </div>
+
+      <!-- main message : green & gold enhanced -->
+      <div class="text-center my-8 md:my-10">
+        <h1 class="hero-title text-5xl md:text-6xl lg:text-7xl font-light tracking-wider leading-tight">
+          <span class="gold-text light-theme:text-[#7a5f1a] dark:text-[#e4c27a]">Coming</span> 
+          <span class="text-[#1a4a2a] dark:text-[#e2dcc8] light-theme:text-[#1a4a2a]">Soon</span>
+        </h1>
+        <div class="w-24 h-1 gold-gradient mx-auto my-5 rounded-full"></div>
+        <p class="text-lg md:text-xl tracking-wide max-w-md mx-auto font-light 
+                  text-[#2d5a3d] dark:text-[#c7c2ae] light-theme:text-[#2d5a3d]">
+          Tradition with Elegance
+        </p>
+      </div>
+
+      <!-- elegant divider + boutique name (gold/green) -->
+      <div class="flex items-center justify-center gap-4 my-4">
+        <span class="h-px w-12 md:w-20 bg-[#b68b3c] dark:bg-[#b8860b]/50 light-theme:bg-[#b68b3c]"></span>
+        <span class="text-sm uppercase tracking-[0.3em] font-medium 
+                     text-[#7a5f1a] dark:text-[#b7a77d] light-theme:text-[#7a5f1a]">
+          Orchids Boutique
+        </span>
+        <span class="h-px w-12 md:w-20 bg-[#b68b3c] dark:bg-[#b8860b]/50 light-theme:bg-[#b68b3c]"></span>
+      </div>
+
+      <!-- description with green & gold accents -->
+      <div class="mt-8 text-center space-y-4">
+        <p class="text-sm md:text-base max-w-xs mx-auto font-light leading-relaxed
+                  text-[#3b6b44] dark:text-[#bdb89e] light-theme:text-[#3b6b44]">
+          A new chapter of refined heritage — <br class="sm:hidden" /> 
+          <span class="gold-text light-theme:text-[#7a5f1a] dark:text-[#d8b86a] font-medium">handcrafted</span> with timeless grace.
+        </p>
+        <!-- decorative leaves / gold & green -->
+        <div class="flex justify-center gap-2 text-[#b68b3c] dark:text-[#c9a84c] light-theme:text-[#b68b3c] text-xl">
+          <i class="fas fa-leaf"></i>
+          <i class="fas fa-asterisk text-xs self-center opacity-70"></i>
+          <i class="fas fa-leaf"></i>
+        </div>
+        <!-- notification pill (light theme enhanced) -->
+        <div class="inline-flex items-center gap-2 mt-4 px-5 py-2 rounded-full border 
+                     notif-pill shadow-sm transition-theme text-xs tracking-wider">
+          <i class="far fa-bell gold-text light-theme:text-[#7a5f1a] dark:text-[#d4af37]"></i>
+          <span>Notify me when we launch</span>
+        </div>
+      </div>
+
+      <!-- footer / social + brand promise (green & gold) -->
+      <div class="mt-10 pt-6 flex flex-col sm:flex-row justify-between items-center gap-4 
+                  border-t border-[#b68b3c]/40 dark:border-[#b8860b]/20 light-theme:border-[#b68b3c]/40">
+        <div class="flex space-x-5 text-sm">
+          <span class="flex items-center gap-1 text-[#3b6b44] dark:text-[#bdb89e] light-theme:text-[#3b6b44]">
+            <i class="far fa-gem gold-text light-theme:text-[#7a5f1a] dark:text-[#d4af37]"></i> heritage
+          </span>
+          <span class="flex items-center gap-1 text-[#3b6b44] dark:text-[#bdb89e] light-theme:text-[#3b6b44]">
+            <i class="far fa-handshake gold-text light-theme:text-[#7a5f1a] dark:text-[#d4af37]"></i> artisan
+          </span>
+        </div>
+        <div class="flex gap-4 text-[#b68b3c] dark:text-[#d4af37] light-theme:text-[#b68b3c] text-base">
+          <a href="#" class="hover:scale-110 transition-transform duration-200 hover:text-[#8a6d1b]"><i class="fab fa-instagram"></i></a>
+          <a href="#" class="hover:scale-110 transition-transform duration-200 hover:text-[#8a6d1b]"><i class="fab fa-pinterest"></i></a>
+          <a href="#" class="hover:scale-110 transition-transform duration-200 hover:text-[#8a6d1b]"><i class="fab fa-etsy"></i></a>
+        </div>
+      </div>
+
+      <!-- tiny signature with gold/green -->
+      <div class="text-center mt-5 text-[10px] tracking-widest opacity-70
+                  text-[#5a7a52] dark:text-[#6d7a62] light-theme:text-[#5a7a52]">
+        <i class="fas fa-chevron-circle-down gold-text light-theme:text-[#7a5f1a] dark:text-[#d4af37] text-[8px]"></i>  
+        tradition with elegance  
+        <i class="fas fa-chevron-circle-down gold-text light-theme:text-[#7a5f1a] dark:text-[#d4af37] text-[8px]"></i>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    (function() {
+      const body = document.getElementById('body');
+      const mainCard = document.getElementById('mainCard');
+      const toggleBtn = document.getElementById('themeToggle');
+      
+      // get stored theme
+      const stored = localStorage.getItem('orchidsTheme') || 'light';
+      
+      function setTheme(theme) {
+        if (theme === 'dark') {
+          body.classList.remove('light-theme');
+          body.classList.add('dark-theme');
+          mainCard.classList.remove('light-theme');
+          mainCard.classList.add('dark-theme');
+          toggleBtn.classList.add('dark');
+          toggleBtn.setAttribute('aria-checked', 'true');
+          localStorage.setItem('orchidsTheme', 'dark');
+        } else {
+          body.classList.remove('dark-theme');
+          body.classList.add('light-theme');
+          mainCard.classList.remove('dark-theme');
+          mainCard.classList.add('light-theme');
+          toggleBtn.classList.remove('dark');
+          toggleBtn.setAttribute('aria-checked', 'false');
+          localStorage.setItem('orchidsTheme', 'light');
+        }
+      }
+
+      // apply stored
+      if (stored === 'dark') {
+        setTheme('dark');
+      } else {
+        setTheme('light');
+      }
+
+      // toggle click
+      toggleBtn.addEventListener('click', function(e) {
+        e.preventDefault();
+        const isDark = body.classList.contains('dark-theme');
+        setTheme(isDark ? 'light' : 'dark');
+      });
+
+      // keyboard support
+      toggleBtn.addEventListener('keydown', function(e) {
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          this.click();
+        }
+      });
+    })();
+  </script>
+</body>
+</html>
